@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const usersRouter = require('../routes/users.js');
 const Users = require('../models/usersModel.js');
@@ -13,6 +14,12 @@ server.post('/api/register', async (req, res) => {
 
   try {
     if (user.username && user.password) {
+      // hash password
+      const password = bcrypt.hashSync(user.password, 5);
+      // replace req password
+      user.password = password;
+
+      // send register data with hashed pass
       const addUser = await Users.register(user);
 
       if (addUser) {
