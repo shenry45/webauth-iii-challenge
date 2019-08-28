@@ -1,6 +1,6 @@
 
 
-const restricted = (req, res, next) => {
+function restricted(req, res, next) {
   next();
 }
 

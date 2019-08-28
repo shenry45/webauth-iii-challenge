@@ -1,9 +1,14 @@
 const db = require('../data/db-config.js');
 
-async function getUsers() {
-  return await db('users');
+function getUsers() {
+  return db('users');
+}
+
+function register(data) {
+  return db('users').insert(data);
 }
 
 module.exports = {
-  getUsers
+  getUsers,
+  register
 }
